@@ -6,6 +6,7 @@ export const siteConfig = {
   email: "contato@srvadvocacia.com.br",
   phone: "+55 (61) 3030-2026",
   address: "Setor Comercial Sul, Brasília — DF",
+  mapQuery: "Setor Comercial Sul, Brasília, Distrito Federal",
   offices: ["Brasília", "Atuação nacional"],
   social: { linkedin: "#", instagram: "#" },
 };
