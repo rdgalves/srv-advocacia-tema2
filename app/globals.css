@@ -139,7 +139,8 @@ img { display:block; width:100%; }
 .cta p { font:400 clamp(54px,7vw,108px)/.98 var(--serif); letter-spacing:-.035em; margin:0; }
 .cta a { border-bottom:1px solid; padding:12px 0; display:flex; gap:30px; min-width:260px; justify-content:space-between; }
 
-.contact { background:#dfe2dc; display:grid; grid-template-columns:40% 60%; gap:8vw; }
+.contact { background:#dfe2dc; display:grid; grid-template-columns:minmax(0,2fr) minmax(0,3fr); gap:clamp(52px,7vw,112px); }
+.contact>* { min-width:0; }
 .contact h2 { font:400 clamp(58px,7vw,105px)/.93 var(--serif); letter-spacing:-.04em; margin:50px 0; }
 .contact-info>p { color:var(--muted); max-width:370px; font-size:17px; }
 .contact-details { margin-top:70px; display:flex; flex-direction:column; align-items:flex-start; font-size:13px; gap:8px; }
