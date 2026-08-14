@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://srveloso.adv.br/sitemap.xml
