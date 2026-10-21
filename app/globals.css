@@ -37,7 +37,7 @@ img { display:block; width:100%; }
 .hero h1 em:after { content:""; position:absolute; width:9px; height:9px; border-radius:50%; background:var(--green); right:-22px; top:52%; animation:pulse 2.4s ease-in-out infinite; }
 .hero-meta { display:flex; gap:42px; text-transform:uppercase; letter-spacing:.13em; font-size:10px; margin-top:8vh; }
 .hero-visual { position:relative; margin:-118px 0 -48px; overflow:hidden; clip-path:polygon(20% 0,100% 0,100% 91%,0 100%,0 18%); background:#c7cac6; }
-.hero-image { position:absolute; inset:-4%; background:linear-gradient(180deg,transparent 50%,rgba(9,16,13,.5)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=90') center/cover; animation:slowzoom 16s ease-in-out infinite alternate; }
+.hero-image { position:absolute; inset:-4%; background:linear-gradient(180deg,transparent 50%,rgba(9,16,13,.5)),url('/escritorio-reuniao.jpg') 62% center/cover; animation:slowzoom 16s ease-in-out infinite alternate; }
 .hero-visual p { position:absolute; bottom:7%; left:9%; color:white; font-size:13px; text-transform:uppercase; letter-spacing:.12em; }
 .hero-line { position:absolute; height:34%; width:1px; background:rgba(255,255,255,.65); bottom:7%; right:10%; }
 .scroll-note { position:absolute; right:calc(43% + 30px); bottom:36px; writing-mode:vertical-rl; font-size:10px; letter-spacing:.15em; text-transform:uppercase; z-index:3; }
@@ -111,7 +111,7 @@ img { display:block; width:100%; }
 .professional-mark small { text-transform:uppercase; letter-spacing:.2em; margin-top:28px; }
 
 .dark-section { min-height:900px; background:var(--dark); color:white; display:grid; grid-template-columns:45% 55%; padding:0; overflow:hidden; }
-.dark-image { background:linear-gradient(180deg,transparent,rgba(7,12,10,.35)),url('https://images.unsplash.com/photo-1497366811364-ccf3f6dfe2c7?auto=format&fit=crop&w=1400&q=88') center/cover; clip-path:polygon(0 0,85% 7%,100% 100%,0 93%); }
+.dark-image { background:linear-gradient(180deg,transparent,rgba(7,12,10,.35)),url('/escritorio-detalhe.jpg') center/cover; clip-path:polygon(0 0,85% 7%,100% 100%,0 93%); }
 .dark-copy { padding:clamp(80px,11vw,170px) 6vw; display:flex; flex-direction:column; justify-content:center; }
 .dark-copy h2 { font:400 clamp(48px,5.3vw,84px)/1.01 var(--serif); letter-spacing:-.03em; margin:60px 0; }
 .dark-copy h2 em { color:#8aaa9f; font-weight:400; }
@@ -144,7 +144,7 @@ img { display:block; width:100%; }
 .presence h2 { font:400 clamp(44px,4.8vw,76px)/1.04 var(--serif); letter-spacing:-.03em; margin:55px 0; }
 .presence p { color:var(--muted); max-width:470px; font-size:17px; }
 .presence-image { overflow:hidden; margin:5vw 0 -4vw; }
-.presence-image img { height:100%; object-fit:cover; filter:saturate(.55) contrast(1.08); }
+.presence-image img { height:100%; object-fit:cover; object-position:65% center; filter:saturate(.72) contrast(1.05); }
 .cta { min-height:620px; padding:clamp(90px,12vw,180px) clamp(22px,6vw,90px); display:flex; align-items:end; justify-content:space-between; gap:40px; }
 .cta p { font:400 clamp(54px,7vw,108px)/.98 var(--serif); letter-spacing:-.035em; margin:0; }
 .cta a { border-bottom:1px solid; padding:12px 0; display:flex; gap:30px; min-width:260px; justify-content:space-between; }
