@@ -48,7 +48,7 @@ function Home() {
 
     <section className="statement section" id="escritorio"><div className="statement-mark">SRV</div><p>Um escritório que nasceu para fazer diferente.</p><h2>Autenticidade, proximidade<br />e estratégia jurídica.</h2><div className="statement-foot"><p>Fundado em 2022 por Salomão Rezende Veloso, o escritório nasceu da vontade de fugir do modelo de escritórios de massa e oferecer assessoria jurídica estratégica, individualizada e conectada à demanda real de cada caso.</p><a className="text-link" href="/advogados">Conheça o fundador <Arrow /></a></div></section>
 
-    <section className="areas section" id="atuacao"><div className="section-aside"><span>Atuação</span><p>Estratégia jurídica construída a partir da realidade de cada cliente.</p></div><div className="areas-list">{practiceAreas.map((item, i) => <button key={item.name} className={i === area ? "active" : ""} onMouseEnter={() => setArea(i)} onFocus={() => setArea(i)} onClick={() => setArea(i)}><span>{item.name}</span><b>↗</b><p>{item.description}</p></button>)}</div><div className="area-panel"><img key={practiceAreas[area].image} src={practiceAreas[area].image} alt="Arquitetura contemporânea" /><span>{practiceAreas[area].name}</span></div></section>
+    <section className="areas section" id="atuacao"><div className="section-aside"><span>Atuação</span><p>Estratégia jurídica construída a partir da realidade de cada cliente.</p></div><div className="areas-list">{practiceAreas.map((item, i) => <button key={item.name} className={i === area ? "active" : ""} onMouseEnter={() => setArea(i)} onFocus={() => setArea(i)} onClick={() => setArea(i)}><span>{item.name}</span><b>↗</b><p>{item.description}</p></button>)}</div><div className="area-panel"><img key={practiceAreas[area].image} src={practiceAreas[area].image} alt="Ambiente do escritório Salomão Rezende Veloso Advocacia" /><span>{practiceAreas[area].name}</span></div></section>
 
     <div className="editorial-strip"><div>CIVIL · CONTENCIOSO CÍVEL · TRIBUTÁRIO · PENAL ECONÔMICO · SOCIETÁRIO · CIVIL · CONTENCIOSO CÍVEL ·</div></div>
 
@@ -58,7 +58,7 @@ function Home() {
 
     <section className="numbers section"><div className="number-intro"><span>Escritório</span><h2>Informação objetiva.<br />Relacionamento transparente.</h2></div><div className="numbers-grid"><div><strong>2022</strong><span>ano de fundação</span></div><div><strong>04</strong><span>áreas de atuação</span></div><div><strong>03</strong><span>tribunais de atuação</span></div><div><strong>DF</strong><span>sede em Brasília</span></div></div></section>
 
-    <section className="presence"><div><span>Brasília/DF</span><h2>No centro do país.<br /><em>Perto de cada cliente.</em></h2><p>Atendimento de segunda a sexta-feira, das 08h às 20h, no Complexo Brasil 21, em Brasília.</p></div><div className="presence-image"><img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1600&q=85" alt="Arquitetura monumental brasileira" loading="lazy" /></div></section>
+    <section className="presence"><div><span>Brasília/DF</span><h2>No centro do país.<br /><em>Perto de cada cliente.</em></h2><p>Atendimento de segunda a sexta-feira, das 08h às 20h, no Complexo Brasil 21, em Brasília.</p></div><div className="presence-image"><img src="/escritorio-recepcao.jpg" alt="Recepção do escritório Salomão Rezende Veloso Advocacia" loading="lazy" /></div></section>
     <Cta /><Contact />
   </main>;
 }
@@ -75,7 +75,7 @@ function Contact() {
 
 function PageHero({ label, title, text }: { label: string; title: string; text: string }) { return <section className="page-hero"><span>{label}</span><h1>{title}</h1><p>{text}</p></section>; }
 
-function PracticePage() { return <main><PageHero label="Atuação" title="Estratégia jurídica para a demanda real de cada caso." text="Atuação em Brasília/DF, perante o TRF1, o TJDFT e o STJ." /><section className="practice-page section">{practiceAreas.map((item) => <article key={item.slug}><div><h2>{item.name}</h2><p>{item.description}</p><a href="/contato">Fale com o escritório <Arrow /></a></div><img src={item.image} alt="Arquitetura contemporânea" loading="lazy" /></article>)}</section><Cta /></main>; }
+function PracticePage() { return <main><PageHero label="Atuação" title="Estratégia jurídica para a demanda real de cada caso." text="Atuação em Brasília/DF, perante o TRF1, o TJDFT e o STJ." /><section className="practice-page section">{practiceAreas.map((item) => <article key={item.slug}><div><h2>{item.name}</h2><p>{item.description}</p><a href="/contato">Fale com o escritório <Arrow /></a></div><img src={item.image} alt="Ambiente do escritório Salomão Rezende Veloso Advocacia" loading="lazy" /></article>)}</section><Cta /></main>; }
 
 function LawyersPage() { const p = lawyers[0]; return <main><PageHero label="Profissional" title="Formação contínua. Atuação próxima." text="Conheça a trajetória do fundador do escritório." /><section className="lawyers-page section"><a className="founder-card" href={`/advogados/${p.slug}`}><img className="professional-photo" src={p.image} alt={`Retrato de ${p.name}`} /><div><span>{p.role} · {p.oab}</span><h2>{p.name}</h2><p>{p.bio}</p><b>Ver perfil completo <Arrow /></b></div></a></section></main>; }
 
