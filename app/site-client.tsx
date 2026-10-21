@@ -66,11 +66,29 @@ function Home() {
 function Cta() { return <section className="cta"><p>Cada caso exige<br /><em>uma estratégia própria.</em></p><a href="/contato">Fale com o escritório <Arrow /></a></section>; }
 
 function Contact() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
-  async function submit(e: FormEvent<HTMLFormElement>) { e.preventDefault(); setStatus("sending"); const form = e.currentTarget; const fd = new FormData(form); await sendContact(Object.fromEntries(fd) as never); setStatus("sent"); form.reset(); }
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "sending") return; // evita envios simultâneos
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    setStatus("sending");
+    setFeedback("");
+    try {
+      const result = await sendContact(Object.fromEntries(fd) as never);
+      setStatus("sent");
+      setFeedback(result.message || "Mensagem enviada com sucesso!");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setFeedback(err instanceof Error ? err.message : "Não foi possível enviar a mensagem. Tente novamente.");
+    }
+  }
   const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(siteConfig.mapQuery)}&output=embed`;
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.mapQuery)}`;
-  return <section className="contact section" id="contato"><div className="contact-info"><span>Contato</span><h2>Vamos<br /><em>conversar.</em></h2><p>Conte brevemente o seu contexto. A demanda será analisada com atenção e individualidade.</p><div className="contact-details"><span>{siteConfig.businessHours}</span><a className="address-link" href={directionsUrl} target="_blank" rel="noreferrer">{siteConfig.address} <Arrow /></a></div><div className="contact-map"><iframe src={mapUrl} title={`Mapa de ${siteConfig.address}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /></div></div><form onSubmit={submit}><label>Nome<input name="name" required /></label><label>E-mail<input name="email" type="email" required /></label><div className="form-row"><label>Telefone<input name="phone" /></label><label>Empresa<input name="company" /></label></div><label>Assunto<input name="subject" required /></label><label>Mensagem<textarea name="message" rows={3} required /></label><button type="submit" disabled={status === "sending"}>{status === "sending" ? "Enviando..." : status === "sent" ? "Mensagem recebida ✓" : "Enviar mensagem"} <Arrow /></button></form></section>;
+  const buttonLabel = status === "sending" ? "Enviando..." : status === "sent" ? "Mensagem enviada ✓" : "Enviar mensagem";
+  return <section className="contact section" id="contato"><div className="contact-info"><span>Contato</span><h2>Vamos<br /><em>conversar.</em></h2><p>Conte brevemente o seu contexto. A demanda será analisada com atenção e individualidade.</p><div className="contact-details"><span>{siteConfig.businessHours}</span><a className="address-link" href={directionsUrl} target="_blank" rel="noreferrer">{siteConfig.address} <Arrow /></a></div><div className="contact-map"><iframe src={mapUrl} title={`Mapa de ${siteConfig.address}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /></div></div><form onSubmit={submit}><label>Nome<input name="name" required maxLength={120} /></label><label>E-mail<input name="email" type="email" required maxLength={200} /></label><div className="form-row"><label>Telefone<input name="phone" maxLength={40} /></label><label>Empresa<input name="company" maxLength={160} /></label></div><label>Assunto<input name="subject" required maxLength={160} /></label><label>Mensagem<textarea name="message" rows={3} required maxLength={4000} /></label><input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} /><button type="submit" disabled={status === "sending"}>{buttonLabel} <Arrow /></button>{feedback && <p className={`form-feedback ${status === "error" ? "is-error" : "is-success"}`} role="status" aria-live="polite">{feedback}</p>}</form></section>;
 }
 
 function PageHero({ label, title, text }: { label: string; title: string; text: string }) { return <section className="page-hero"><span>{label}</span><h1>{title}</h1><p>{text}</p></section>; }
