@@ -105,6 +105,7 @@ img { display:block; width:100%; }
 .founder-card p { color:var(--muted); max-width:650px; font-size:17px; }
 .founder-card b { font-size:13px; font-weight:400; border-bottom:1px solid; margin-top:28px; padding-bottom:5px; display:flex; gap:22px; }
 .founder-card>div:last-child>span { text-transform:uppercase; letter-spacing:.14em; font-size:10px; color:var(--green); }
+.professional-photo { width:100%; height:520px; object-fit:cover; object-position:center 30%; filter:saturate(.82) contrast(1.02); }
 .professional-mark { background:var(--green); color:white; min-height:520px; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:40px; }
 .professional-mark span { font:400 clamp(92px,13vw,210px)/1 var(--serif); letter-spacing:-.09em; }
 .professional-mark small { text-transform:uppercase; letter-spacing:.2em; margin-top:28px; }

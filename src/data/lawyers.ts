@@ -10,4 +10,5 @@ export const lawyers = [{
   languages: ["Inglês — intermediário", "Espanhol — intermediário"],
   lattes: "https://lattes.cnpq.br/5772833388603328",
   linkedin: "https://linkedin.com/in/salom%C3%A3o-veloso-2192b2373",
+  image: "/salomao-rezende-veloso.jpg",
 }];
