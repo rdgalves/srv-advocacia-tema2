@@ -113,8 +113,21 @@ test("sendContactEmail trata falha de autenticação do Resend sem vazar credenc
     fakeFetch,
   );
   assert.equal(result.ok, false);
-  assert.equal(result.status, 502);
+  // 4xx do provedor (credencial/validação) = configuração nossa -> 500.
+  assert.equal(result.status, 500);
   assert.doesNotMatch(result.internalError ?? "", /re_bad/);
+});
+
+test("sendContactEmail mapeia 4xx de validação do provedor para 500", async () => {
+  const fakeFetch = async () =>
+    new Response(JSON.stringify({ message: "The from address is not verified" }), { status: 422 });
+  const result = await sendContactEmail(
+    { apiKey: "re_test", from: "nao-verificado@srv.example", to: "contato@srv.example" },
+    buildContactEmail(validInput),
+    fakeFetch,
+  );
+  assert.equal(result.ok, false);
+  assert.equal(result.status, 500);
 });
 
 test("sendContactEmail trata indisponibilidade do provedor (5xx)", async () => {
