@@ -79,8 +79,13 @@ export async function sendContactEmail(
     // ignore
   }
 
-  // 401/403 = credencial; 429 = limite; demais 4xx = requisição; 5xx = provedor.
-  const mappedStatus = response.status === 429 ? 429 : response.status >= 500 ? 502 : 502;
+  // Mapeamento para o status exposto pela nossa API:
+  // - 429 (limite do provedor)          -> 429
+  // - 5xx (indisponibilidade do provedor) -> 502
+  // - demais 4xx (credencial inválida, `from` não verificado, `to` inválido)
+  //   são erros de CONFIGURAÇÃO nossa, não falha do visitante -> 500
+  const mappedStatus =
+    response.status === 429 ? 429 : response.status >= 500 ? 502 : 500;
 
   return {
     ok: false,
