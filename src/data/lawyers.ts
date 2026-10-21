@@ -1,8 +1,13 @@
-export const lawyers = [
-  { name: "Salomão Rezende Veloso", slug: "salomao-rezende-veloso", role: "Sócio fundador", areas: ["Empresarial", "Contencioso"], bio: "Atua na construção de estratégias jurídicas para temas empresariais e institucionais de alta complexidade.", education: ["Mestre em Direito Empresarial", "Especialista em Processo Civil"], languages: ["Português", "Inglês"], image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85" },
-  { name: "Marina Avelar", slug: "marina-avelar", role: "Sócia", areas: ["Público", "Administrativo"], bio: "Assessora organizações em suas relações com o poder público e em ambientes regulados.", education: ["Mestre em Direito do Estado", "Especialista em Regulação"], languages: ["Português", "Inglês"], image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=900&q=85" },
-  { name: "Rafael Monteiro", slug: "rafael-monteiro", role: "Sócio", areas: ["Tributário", "Empresarial"], bio: "Combina visão tributária e empresarial na estruturação de operações e investimentos.", education: ["LL.M. em Direito Tributário", "Bacharel em Direito"], languages: ["Português", "Inglês", "Espanhol"], image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85" },
-  { name: "Laura Campos", slug: "laura-campos", role: "Advogada sênior", areas: ["Contencioso", "Contratos"], bio: "Atuação em disputas empresariais e prevenção de conflitos contratuais.", education: ["Especialista em Processo Civil", "Bacharel em Direito"], languages: ["Português", "Inglês"], image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=85" },
-  { name: "André Fontes", slug: "andre-fontes", role: "Advogado", areas: ["Imobiliário", "Empresarial"], bio: "Assessoria em operações imobiliárias, desenvolvimento de projetos e contratos.", education: ["Pós-graduado em Direito Imobiliário"], languages: ["Português", "Inglês"], image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=85" },
-  { name: "Bianca Nogueira", slug: "bianca-nogueira", role: "Advogada", areas: ["Público", "Governamentais"], bio: "Pesquisa e atuação estratégica em políticas públicas e relações institucionais.", education: ["Especialista em Direito Administrativo"], languages: ["Português", "Inglês"], image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=85" },
-];
+export const lawyers = [{
+  name: "Salomão Rezende Veloso",
+  slug: "salomao-rezende-veloso",
+  role: "Advogado fundador",
+  oab: "OAB/DF 72.358",
+  areas: ["Direito Civil / Contencioso Cível", "Direito Tributário", "Direito Penal Econômico", "Direito Societário"],
+  bio: "Fundador do escritório em 2022, atua com assessoria jurídica estratégica e individualizada, mantendo contato próximo com o cliente e atenção à demanda real de cada caso.",
+  education: ["Mestrando em Direito Tributário pelo IDP", "Pós-graduado em Direito Eleitoral pela UFMA (2019–2020)", "Bacharel em Direito pela Universidade CEUMA (2013–2018)"],
+  experience: ["Assessor Jurídico no Município de São José de Ribamar/MA (2021–2022)", "Advocacia autônoma em São Luís/MA (2018–2022)"],
+  languages: ["Inglês — intermediário", "Espanhol — intermediário"],
+  lattes: "https://lattes.cnpq.br/5772833388603328",
+  linkedin: "https://linkedin.com/in/salom%C3%A3o-veloso-2192b2373",
+}];

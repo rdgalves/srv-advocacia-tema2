@@ -12,15 +12,15 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
   metadataBase: new URL(`${protocol}://${host}`),
   title: { default: "Salomão Rezende Veloso Advocacia", template: "%s | SRV Advocacia" },
-  description: "Estratégia jurídica, profundidade técnica e visão de contexto para decisões que movem negócios e instituições.",
+  description: "Assessoria jurídica estratégica, próxima e individualizada em Direito Civil, Tributário, Penal Econômico e Societário, em Brasília/DF.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Salomão Rezende Veloso Advocacia",
-    description: "Direito em movimento. Estratégia para decisões relevantes.",
+    description: "Assessoria jurídica estratégica, próxima e individualizada em Brasília/DF.",
     locale: "pt_BR",
     type: "website", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Salomão Rezende Veloso Advocacia — Direito em movimento" }],
   },
-  twitter: { card: "summary_large_image", title: "Salomão Rezende Veloso Advocacia", description: "Direito em movimento. Estratégia para decisões relevantes.", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "Salomão Rezende Veloso Advocacia", description: "Assessoria jurídica estratégica, próxima e individualizada em Brasília/DF.", images: ["/og.png"] },
   icons: { icon: "/srv-logo.png", shortcut: "/srv-logo.png" },
   };
 }
