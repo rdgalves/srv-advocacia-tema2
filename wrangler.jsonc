@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "srv-advocacia-tema2",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "no_bundle": true,
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": ["**/*.js", "**/*.mjs"]
+    }
+  ],
+  "build": {
+    "command": "pnpm run build",
+    "watch_dir": "./src"
+  },
+  "assets": {
+    "directory": "dist/client"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
