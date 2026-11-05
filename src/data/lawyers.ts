@@ -1,4 +1,19 @@
-export const lawyers = [
+export type Professional = {
+  name: string;
+  slug: string;
+  role: string;
+  oab?: string;
+  areas: string[];
+  bio: string;
+  education: string[];
+  experience: string[];
+  languages: string[];
+  lattes?: string;
+  linkedin?: string;
+  image: string;
+};
+
+export const lawyers: Professional[] = [
   {
     name: "Salomão Rezende Veloso",
     slug: "salomao-rezende-veloso",
@@ -31,5 +46,16 @@ export const lawyers = [
     lattes: "http://lattes.cnpq.br/0751200665562418",
     linkedin: "https://www.linkedin.com/in/samuel-sales-a55125204",
     image: "/samuel-sales-freire-alves.jpg",
+  },
+  {
+    name: "Maria Luiza Garcia Ataides",
+    slug: "maria-luiza-garcia-ataides",
+    role: "Estagiária",
+    areas: [],
+    bio: "Graduanda em Direito pela Universidade de Brasília (UnB), integra a equipe do escritório como estagiária.",
+    education: ["Graduanda em Direito pela Universidade de Brasília (UnB)"],
+    experience: [],
+    languages: [],
+    image: "/maria-luiza-garcia-ataides.jpg",
   },
 ];
