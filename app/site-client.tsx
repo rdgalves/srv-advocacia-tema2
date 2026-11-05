@@ -21,7 +21,7 @@ function Header() {
     onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const links = [["Escritório", "/#escritorio"], ["Atuação", "/atuacao"], ["Profissional", "/advogados"], ["Publicações", "/artigos"], ["Contato", "/contato"]];
+  const links = [["Escritório", "/#escritorio"], ["Atuação", "/atuacao"], ["Profissionais", "/advogados"], ["Publicações", "/artigos"], ["Contato", "/contato"]];
   return <>
     <header className={`header ${scrolled ? "is-scrolled" : ""}`}><a href="/" aria-label="Página inicial"><Logo /></a><nav className="desktop-nav" aria-label="Navegação principal">{links.map(([n, h]) => <a key={n} href={h}>{n}</a>)}</nav><a className="header-cta" href="/contato">Fale conosco <Arrow /></a><button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label={open ? "Fechar menu" : "Abrir menu"}><span /><span /></button></header>
     <div className={`mobile-menu ${open ? "open" : ""}`} aria-hidden={!open}><Logo light /><nav>{links.map(([n, h]) => <a key={n} href={h} onClick={() => setOpen(false)}>{n}<Arrow /></a>)}</nav><p>{siteConfig.address}<br />{siteConfig.businessHours}</p></div>
@@ -32,7 +32,7 @@ function Footer() {
   return <footer className="footer">
     <div className="footer-top"><Logo light /><p>Atuação próxima.<br />Estratégia para cada caso.</p></div>
     <div className="footer-grid">
-      <div><small>Navegação</small><a href="/#escritorio">Escritório</a><a href="/atuacao">Atuação</a><a href="/advogados">Profissional</a><a href="/artigos">Publicações</a></div>
+      <div><small>Navegação</small><a href="/#escritorio">Escritório</a><a href="/atuacao">Atuação</a><a href="/advogados">Profissionais</a><a href="/artigos">Publicações</a></div>
       <div><small>Endereço e atendimento</small><span>{siteConfig.address}</span><span>{siteConfig.businessHours}</span></div>
       <div><small>Institucional</small><a href="/privacidade">Privacidade</a><a href="/termos">Termos de uso</a><a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a href={siteConfig.social.lattes} target="_blank" rel="noreferrer">Currículo Lattes</a></div>
     </div>
@@ -52,7 +52,7 @@ function Home() {
 
     <div className="editorial-strip"><div>CIVIL · CONTENCIOSO CÍVEL · TRIBUTÁRIO · PENAL ECONÔMICO · SOCIETÁRIO · CIVIL · CONTENCIOSO CÍVEL ·</div></div>
 
-    <section className="team section"><div className="team-head"><h2>Experiência técnica.<br /><em>Atuação pessoal.</em></h2><p>O acompanhamento próximo permite compreender o contexto, avaliar os riscos e construir uma estratégia compatível com os objetivos de cada cliente.</p></div><a className="founder-card" href="/advogados/salomao-rezende-veloso"><img className="professional-photo" src={lawyers[0].image} alt={`Retrato de ${lawyers[0].name}`} /><div><span>{lawyers[0].role} · {lawyers[0].oab}</span><h3>{lawyers[0].name}</h3><p>{lawyers[0].bio}</p><b>Conheça a trajetória <Arrow /></b></div></a></section>
+    <section className="team section"><div className="team-head"><h2>Experiência técnica.<br /><em>Atuação próxima.</em></h2><p>Profissionais com trajetórias complementares, unidos pelo compromisso com uma assessoria estratégica, pessoal e atenta à realidade de cada cliente.</p></div><div className="lawyers-grid team-professionals">{lawyers.map((p) => <a href={`/advogados/${p.slug}`} key={p.slug}><img src={p.image} alt={`Retrato de ${p.name}`} loading="lazy" /><h3>{p.name}</h3><span>{p.role} · {p.oab}</span><p>{p.areas.join(" · ")}</p></a>)}</div><a className="text-link team-link" href="/advogados">Conheça os profissionais <Arrow /></a></section>
 
     <section className="dark-section"><div className="dark-image" /><div className="dark-copy"><span>Presença institucional</span><h2>Sede em Brasília.<br /><em>Atuação qualificada</em><br />nos tribunais.</h2><p>Atuação perante o Tribunal Regional Federal da 1ª Região, o Tribunal de Justiça do Distrito Federal e dos Territórios e o Superior Tribunal de Justiça.</p></div></section>
 
@@ -95,9 +95,9 @@ function PageHero({ label, title, text }: { label: string; title: string; text: 
 
 function PracticePage() { return <main><PageHero label="Atuação" title="Estratégia jurídica para a demanda real de cada caso." text="Atuação em Brasília/DF, perante o TRF1, o TJDFT e o STJ." /><section className="practice-page section">{practiceAreas.map((item) => <article key={item.slug}><div><h2>{item.name}</h2><p>{item.description}</p><a href="/contato">Fale com o escritório <Arrow /></a></div><img src={item.image} alt="Ambiente do escritório Salomão Rezende Veloso Advocacia" loading="lazy" /></article>)}</section><Cta /></main>; }
 
-function LawyersPage() { const p = lawyers[0]; return <main><PageHero label="Profissional" title="Formação contínua. Atuação próxima." text="Conheça a trajetória do fundador do escritório." /><section className="lawyers-page section"><a className="founder-card" href={`/advogados/${p.slug}`}><img className="professional-photo" src={p.image} alt={`Retrato de ${p.name}`} /><div><span>{p.role} · {p.oab}</span><h2>{p.name}</h2><p>{p.bio}</p><b>Ver perfil completo <Arrow /></b></div></a></section></main>; }
+function LawyersPage() { return <main><PageHero label="Profissionais" title="Formação contínua. Atuação próxima." text="Conheça as trajetórias dos profissionais do escritório." /><section className="lawyers-page section"><div className="lawyers-grid">{lawyers.map((p) => <a href={`/advogados/${p.slug}`} key={p.slug}><img src={p.image} alt={`Retrato de ${p.name}`} /><h2>{p.name}</h2><span>{p.role} · {p.oab}</span><p>{p.areas.join(" · ")}</p></a>)}</div></section></main>; }
 
-function LawyerPage() { const p = lawyers[0]; return <main className="profile"><section className="profile-hero"><img src={p.image} alt={`Retrato de ${p.name}`} /><div><a href="/advogados">← Profissional</a><span>{p.role} · {p.oab}</span><h1>{p.name}</h1><p>{p.areas.join(" · ")}</p></div></section><section className="profile-body section"><div><span>Trajetória</span><h2>{p.bio}</h2><p className="profile-links"><a href={p.lattes} target="_blank" rel="noreferrer">Currículo Lattes <Arrow /></a><a href={p.linkedin} target="_blank" rel="noreferrer">LinkedIn <Arrow /></a></p></div><div className="profile-details"><section><h3>Formação</h3>{p.education.map((x) => <p key={x}>{x}</p>)}</section><section><h3>Experiência profissional</h3>{p.experience.map((x) => <p key={x}>{x}</p>)}</section><section><h3>Áreas de atuação</h3>{p.areas.map((x) => <p key={x}>{x}</p>)}</section><section><h3>Idiomas</h3>{p.languages.map((x) => <p key={x}>{x}</p>)}</section></div></section><Cta /></main>; }
+function LawyerPage({ slug }: { slug: string }) { const p = lawyers.find((person) => person.slug === slug) || lawyers[0]; return <main className="profile"><section className="profile-hero"><img src={p.image} alt={`Retrato de ${p.name}`} /><div><a href="/advogados">← Profissionais</a><span>{p.role} · {p.oab}</span><h1>{p.name}</h1><p>{p.areas.join(" · ")}</p></div></section><section className="profile-body section"><div><span>Trajetória</span><h2>{p.bio}</h2><p className="profile-links"><a href={p.lattes} target="_blank" rel="noreferrer">Currículo Lattes <Arrow /></a><a href={p.linkedin} target="_blank" rel="noreferrer">LinkedIn <Arrow /></a></p></div><div className="profile-details"><section><h3>Formação</h3>{p.education.map((x) => <p key={x}>{x}</p>)}</section><section><h3>Experiência profissional</h3>{p.experience.map((x) => <p key={x}>{x}</p>)}</section><section><h3>Áreas de atuação</h3>{p.areas.map((x) => <p key={x}>{x}</p>)}</section><section><h3>Idiomas</h3>{p.languages.map((x) => <p key={x}>{x}</p>)}</section></div></section><Cta /></main>; }
 
 function ArticlesPage() { return <main><PageHero label="Publicações" title="Conteúdo jurídico em preparação." text="Este espaço será dedicado a análises sobre temas relevantes das áreas de atuação do escritório." /><section className="empty-state section"><span>Em breve</span><h2>Novas perspectivas serão publicadas aqui.</h2><a className="text-link" href="/contato">Fale com o escritório <Arrow /></a></section></main>; }
 
@@ -108,7 +108,7 @@ export function Site({ route }: { route: string }) {
   if (route === "/") content = <Home />;
   else if (route === "/atuacao") content = <PracticePage />;
   else if (route === "/advogados") content = <LawyersPage />;
-  else if (route.startsWith("/advogados/")) content = <LawyerPage />;
+  else if (route.startsWith("/advogados/")) content = <LawyerPage slug={route.split("/").pop() || ""} />;
   else if (route === "/artigos") content = <ArticlesPage />;
   else if (route.startsWith("/artigos/")) content = <ArticlesPage />;
   else if (route === "/contato") content = <main><PageHero label="Contato" title="Toda boa estratégia começa com uma conversa." text="Compartilhe seu contexto para uma análise atenta e individualizada." /><Contact /></main>;
