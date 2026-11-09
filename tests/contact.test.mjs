@@ -28,7 +28,7 @@ test("validateContact aceita um envio válido e normaliza os campos", () => {
 });
 
 test("validateContact rejeita campos obrigatórios ausentes", () => {
-  for (const key of ["name", "email", "subject", "message"]) {
+  for (const key of ["name", "subject", "message"]) {
     const input = { ...validInput, [key]: "" };
     const result = validateContact(input);
     assert.equal(result.ok, false);
@@ -36,10 +36,27 @@ test("validateContact rejeita campos obrigatórios ausentes", () => {
   }
 });
 
+test("validateContact exige e-mail ou telefone", () => {
+  const result = validateContact({ ...validInput, email: "", phone: "" });
+  assert.equal(result.ok, false);
+  assert.match(result.message, /e-mail ou telefone/i);
+});
+
+test("validateContact aceita telefone válido sem e-mail", () => {
+  const result = validateContact({ ...validInput, email: "", phone: "(61) 99999-0000" });
+  assert.equal(result.ok, true);
+});
+
 test("validateContact rejeita e-mail inválido", () => {
   const result = validateContact({ ...validInput, email: "nao-e-email" });
   assert.equal(result.ok, false);
   assert.equal(result.status, 400);
+});
+
+test("validateContact rejeita telefone inválido", () => {
+  const result = validateContact({ ...validInput, email: "", phone: "123" });
+  assert.equal(result.ok, false);
+  assert.match(result.message, /telefone válido/i);
 });
 
 test("validateContact rejeita campos acima do limite", () => {

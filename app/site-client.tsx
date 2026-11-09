@@ -44,7 +44,7 @@ function Footer() {
 function Home() {
   const [area, setArea] = useState(0);
   return <main>
-    <section className="hero"><div className="hero-copy"><p className="hero-kicker">Advocacia estratégica · Brasília/DF</p><h1>Estratégia jurídica<br />para demandas que<br /><em>pedem atenção.</em></h1><div className="hero-meta"><span>Fundado em 2022</span><span>Atuação no TRF1, TJDFT e STJ</span></div></div><div className="hero-visual"><video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/escritorio-reuniao.jpg" aria-label="Ambientes do escritório Salomão Rezende Veloso Advocacia"><source src="/hero-escritorio.mp4" type="video/mp4" /></video><div className="hero-shade" /><div className="hero-line" /><p>Contato próximo.<br />Assessoria individualizada.</p></div><a className="scroll-note" href="#escritorio">Descubra <span>↓</span></a></section>
+    <section className="hero"><div className="hero-copy"><p className="hero-kicker">Advocacia estratégica · Brasília/DF</p><h1>Estratégia jurídica<br />para demandas que<br /><em>pedem atenção.</em></h1><div className="hero-meta"><span>Fundado em 2022</span></div></div><div className="hero-visual"><video className="hero-video" autoPlay muted loop playsInline preload="metadata" poster="/escritorio-reuniao.jpg" aria-label="Ambientes do escritório Salomão Rezende Veloso Advocacia"><source src="/hero-escritorio.mp4" type="video/mp4" /></video><div className="hero-shade" /><div className="hero-line" /><p>Contato próximo.<br />Assessoria individualizada.</p></div><a className="scroll-note" href="#escritorio">Descubra <span>↓</span></a></section>
 
     <section className="statement section" id="escritorio"><div className="statement-mark">SRV</div><p>Um escritório que nasceu para fazer diferente.</p><h2>Autenticidade, proximidade<br />e estratégia jurídica.</h2><div className="statement-foot"><p>Fundado em 2022 por Salomão Rezende Veloso, o escritório nasceu da vontade de fugir do modelo de escritórios de massa e oferecer assessoria jurídica estratégica, individualizada e conectada à demanda real de cada caso.</p><a className="text-link" href="/advogados">Conheça o fundador <Arrow /></a></div></section>
 
@@ -65,6 +65,14 @@ function Home() {
 
 function Cta() { return <section className="cta"><p>Cada caso exige<br /><em>uma estratégia própria.</em></p><a href="/contato">Fale com o escritório <Arrow /></a></section>; }
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [feedback, setFeedback] = useState("");
@@ -72,6 +80,17 @@ function Contact() {
     e.preventDefault();
     if (status === "sending") return; // evita envios simultâneos
     const form = e.currentTarget;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+    const phoneInput = form.elements.namedItem("phone") as HTMLInputElement;
+    emailInput.setCustomValidity("");
+    phoneInput.setCustomValidity("");
+    if (!emailInput.value.trim() && !phoneInput.value.trim()) {
+      const message = "Informe um e-mail ou telefone para contato.";
+      emailInput.setCustomValidity(message);
+      phoneInput.setCustomValidity(message);
+      emailInput.reportValidity();
+      return;
+    }
     const fd = new FormData(form);
     setStatus("sending");
     setFeedback("");
@@ -88,7 +107,7 @@ function Contact() {
   const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(siteConfig.mapQuery)}&output=embed`;
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.mapQuery)}`;
   const buttonLabel = status === "sending" ? "Enviando..." : status === "sent" ? "Mensagem enviada ✓" : "Enviar mensagem";
-  return <section className="contact section" id="contato"><div className="contact-info"><span>Contato</span><h2>Vamos<br /><em>conversar.</em></h2><p>Conte brevemente o seu contexto. A demanda será analisada com atenção e individualidade.</p><div className="contact-details"><span>{siteConfig.businessHours}</span><a className="address-link" href={directionsUrl} target="_blank" rel="noreferrer">{siteConfig.address} <Arrow /></a></div><div className="contact-map"><iframe src={mapUrl} title={`Mapa de ${siteConfig.address}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /></div></div><form onSubmit={submit}><label>Nome<input name="name" required maxLength={120} /></label><label>E-mail<input name="email" type="email" required maxLength={200} /></label><div className="form-row"><label>Telefone<input name="phone" maxLength={40} /></label><label>Empresa<input name="company" maxLength={160} /></label></div><label>Assunto<input name="subject" required maxLength={160} /></label><label>Mensagem<textarea name="message" rows={3} required maxLength={4000} /></label><input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} /><button type="submit" disabled={status === "sending"}>{buttonLabel} <Arrow /></button>{feedback && <p className={`form-feedback ${status === "error" ? "is-error" : "is-success"}`} role="status" aria-live="polite">{feedback}</p>}</form></section>;
+  return <section className="contact section" id="contato"><div className="contact-info"><span>Contato</span><h2>Vamos<br /><em>conversar.</em></h2><p>Conte brevemente o seu contexto. A demanda será analisada com atenção e individualidade.</p><div className="contact-details"><span>{siteConfig.businessHours}</span><a className="address-link" href={directionsUrl} target="_blank" rel="noreferrer">{siteConfig.address} <Arrow /></a></div><div className="contact-map"><iframe src={mapUrl} title={`Mapa de ${siteConfig.address}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /></div></div><form onSubmit={submit}><label>Nome<input name="name" required maxLength={120} autoComplete="name" /></label><p className="form-requirement">Informe pelo menos um meio de contato: e-mail ou telefone.</p><label>E-mail<input name="email" type="email" maxLength={200} autoComplete="email" onInput={(e) => e.currentTarget.setCustomValidity("")} /></label><div className="form-row"><label>Telefone<input name="phone" type="tel" inputMode="numeric" maxLength={15} autoComplete="tel" placeholder="(61) 99999-9999" onInput={(e) => { e.currentTarget.value = formatPhone(e.currentTarget.value); e.currentTarget.setCustomValidity(""); }} /></label><label>Empresa<input name="company" maxLength={160} autoComplete="organization" /></label></div><label>Assunto<input name="subject" required maxLength={160} /></label><label>Mensagem<textarea name="message" rows={3} required maxLength={4000} /></label><input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} /><button type="submit" disabled={status === "sending"}>{buttonLabel} <Arrow /></button>{feedback && <p className={`form-feedback ${status === "error" ? "is-error" : "is-success"}`} role="status" aria-live="polite">{feedback}</p>}</form></section>;
 }
 
 function PageHero({ label, title, text }: { label: string; title: string; text: string }) { return <section className="page-hero"><span>{label}</span><h1>{title}</h1><p>{text}</p></section>; }
