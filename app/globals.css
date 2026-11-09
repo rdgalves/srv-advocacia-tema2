@@ -199,7 +199,7 @@ img { display:block; width:100%; }
 .lawyers-grid span { color:var(--green); font-size:12px; }.lawyers-grid p { color:var(--muted); font-size:12px; margin:4px 0; }
 .team-professionals { grid-template-columns:repeat(3,minmax(0,1fr)); }
 .profile-hero { min-height:90vh; padding-top:110px; display:grid; grid-template-columns:48% 52%; background:#e2e3df; }
-.profile-hero img { height:calc(90vh - 110px); object-fit:cover; object-position:center top; filter:saturate(.92) contrast(1.02); }
+.profile-hero img { height:calc(90vh - 110px); object-fit:contain; object-position:center top; background:#d6d7d3; filter:saturate(.92) contrast(1.02); }
 .profile-hero>div { padding:8vw; display:flex; flex-direction:column; justify-content:end; }
 .profile-hero>.professional-mark { min-height:calc(90vh - 110px); padding:40px; justify-content:center; }
 .profile-hero>.professional-mark span { color:white; font-size:clamp(110px,14vw,220px); letter-spacing:-.09em; }
