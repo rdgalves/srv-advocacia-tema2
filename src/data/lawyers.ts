@@ -33,7 +33,7 @@ export const lawyers: Professional[] = [
     slug: "samuel-sales-freire-alves",
     role: "Advogado",
     oab: "OAB/DF 83.869",
-    areas: ["Direito Civil", "Processo Civil"],
+    areas: ["Direito Civil / Contencioso Cível", "Processo Civil"],
     bio: "Advogado com formação pela Universidade de Brasília e experiência em representação institucional, associativismo empresarial e pesquisa científica premiada nacional e internacionalmente.",
     education: ["Pós-graduado em Direito Civil e Processo Civil", "Bacharel em Direito pela Universidade de Brasília (UnB)"],
     experience: [
