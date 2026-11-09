@@ -36,6 +36,11 @@ export type ValidationResult =
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function phoneDigits(value: string): string {
+  const digits = value.replace(/\D/g, "");
+  return digits.startsWith("55") && digits.length > 11 ? digits.slice(2) : digits;
+}
+
 function asString(value: unknown): string {
   if (typeof value === "string") return value;
   if (typeof value === "number" || typeof value === "boolean") return String(value);
@@ -71,15 +76,26 @@ export function validateContact(input: unknown): ValidationResult {
     message: asString(raw.message).trim(),
   };
 
-  const required: Array<keyof ContactFields> = ["name", "email", "subject", "message"];
+  const required: Array<keyof ContactFields> = ["name", "subject", "message"];
   for (const key of required) {
     if (fields[key].length === 0) {
       return { ok: false, status: 400, message: "Preencha todos os campos obrigatórios." };
     }
   }
 
-  if (!EMAIL_PATTERN.test(fields.email)) {
+  if (!fields.email && !fields.phone) {
+    return { ok: false, status: 400, message: "Informe um e-mail ou telefone para contato." };
+  }
+
+  if (fields.email && !EMAIL_PATTERN.test(fields.email)) {
     return { ok: false, status: 400, message: "Informe um e-mail válido." };
+  }
+
+  if (fields.phone) {
+    const digits = phoneDigits(fields.phone);
+    if (digits.length !== 10 && digits.length !== 11) {
+      return { ok: false, status: 400, message: "Informe um telefone válido com DDD." };
+    }
   }
 
   for (const key of Object.keys(FIELD_LIMITS) as Array<keyof typeof FIELD_LIMITS>) {
@@ -109,7 +125,7 @@ export interface BuiltEmail {
   subject: string;
   html: string;
   text: string;
-  replyTo: string;
+  replyTo?: string;
 }
 
 /** Monta assunto, corpo HTML e texto simples do e-mail institucional. */
@@ -156,7 +172,7 @@ export function buildContactEmail(fields: ContactFields): BuiltEmail {
       </tr>
       <tr>
         <td style="padding:16px 28px;border-top:1px solid #e4e8e3;color:#9aa09a;font-size:12px;">
-          Responda diretamente a este e-mail para falar com ${escapeHtml(fields.name)}.
+          ${fields.email ? `Responda diretamente a este e-mail para falar com ${escapeHtml(fields.name)}.` : `Entre em contato por telefone com ${escapeHtml(fields.name)}.`}
         </td>
       </tr>
     </table>
@@ -176,5 +192,5 @@ export function buildContactEmail(fields: ContactFields): BuiltEmail {
     fields.message,
   ].join("\n");
 
-  return { subject, html, text, replyTo: fields.email };
+  return { subject, html, text, replyTo: fields.email || undefined };
 }

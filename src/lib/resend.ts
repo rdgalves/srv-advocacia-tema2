@@ -44,7 +44,7 @@ export async function sendContactEmail(
       body: JSON.stringify({
         from: config.from,
         to: [config.to],
-        reply_to: email.replyTo,
+        ...(email.replyTo ? { reply_to: email.replyTo } : {}),
         subject: email.subject,
         html: email.html,
         text: email.text,
